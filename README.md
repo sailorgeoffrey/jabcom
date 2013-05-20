@@ -1,4 +1,4 @@
-jabcom-api
-==========
+Just A Basic Column Object Mapper
+=================================
 
-Just A Basic Column Object Mapper API
+This is a framework to map objects for column-store nosql engines.
