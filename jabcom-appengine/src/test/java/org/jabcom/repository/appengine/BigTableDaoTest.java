@@ -159,9 +159,9 @@ public class BigTableDaoTest {
     public void testGenericDaoOperations() throws Exception {
 
         BaseDao<Key, TestParentObject> parentDao =
-                new BaseDaoBigTableImpl<TestParentObject>(datastore, TestParentObject.class);
+                new BaseDaoBigTable<TestParentObject>(datastore, TestParentObject.class);
         BaseDao<Key, TestChildObject> childDao =
-                new BaseDaoBigTableImpl<TestChildObject>(datastore, TestChildObject.class);
+                new BaseDaoBigTable<TestChildObject>(datastore, TestChildObject.class);
 
         TestParentObject parentObject = new TestParentObject();
         Key parentKey = KeyFactory.createKey("parent", 1L);
@@ -222,7 +222,7 @@ public class BigTableDaoTest {
 
     @Test(expected = IllegalStateException.class)
     public void testInaccessibleConstructorException() throws Exception {
-        BaseDao<Key, BadClassOne> dao = new BaseDaoBigTableImpl<BadClassOne>(datastore, BadClassOne.class);
+        BaseDao<Key, BadClassOne> dao = new BaseDaoBigTable<BadClassOne>(datastore, BadClassOne.class);
         BadClassOne data = new BadClassOne();
         dao.save(data);
         Key key = data.getKey();
@@ -245,7 +245,7 @@ public class BigTableDaoTest {
 
     @Test(expected = IllegalStateException.class)
     public void testMissingConstructorException() throws Exception {
-        BaseDao<Key, BadClass> dao = new BaseDaoBigTableImpl<BadClass>(datastore, BadClass.class);
+        BaseDao<Key, BadClass> dao = new BaseDaoBigTable<BadClass>(datastore, BadClass.class);
         BadClass data = new BadClass(KeyFactory.createKey("test", 1L));
         dao.save(data);
         Key key = data.getKey();
@@ -255,7 +255,7 @@ public class BigTableDaoTest {
 
     @Test
     public void testEntitiesToObjects() throws Exception {
-        new BaseDaoBigTableImpl<Serializable>(datastore, TestParentObject.class) {
+        new BaseDaoBigTable<Serializable>(datastore, TestParentObject.class) {
             {
                 save(new TestParentObject());
                 save(new TestParentObject());
@@ -273,7 +273,7 @@ public class BigTableDaoTest {
 
     @Test
     public void testGetDataStore() throws Exception {
-        new BaseDaoBigTableImpl<Serializable>(datastore, Serializable.class) {
+        new BaseDaoBigTable<Serializable>(datastore, Serializable.class) {
             {
                 Assert.assertSame(datastore, getDatastore());
             }
